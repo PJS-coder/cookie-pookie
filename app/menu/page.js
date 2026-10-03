@@ -1,4 +1,4 @@
-import {PageHead, MenuCardsShowcase, MenuGrid} from '../components';
+import {PageHead, MenuCardsShowcase, MenuGrid, OnlineDeliveryStrip} from '../components';
 
 export const metadata = {
   title: 'Our Menu',
@@ -13,6 +13,8 @@ export default function Menu(){
       </PageHead>
       
       <MenuCardsShowcase/>
+
+      <OnlineDeliveryStrip/>
 
       <MenuGrid/>
     </section>

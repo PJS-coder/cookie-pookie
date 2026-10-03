@@ -60,27 +60,52 @@ export function Header(){
           <Link href="/" aria-label="CookiePookie home">
             <BrandLogo/>
           </Link>
-          <button className="mobile-toggle" aria-label={open?'Close menu':'Open menu'} aria-expanded={open} aria-controls="navigation" onClick={()=>setOpen(!open)}>
-            {open?<X size={22}/>:<Menu size={22}/>}
-          </button>
-          <nav id="navigation" className={open?'open':''}>
-            {[
-              ['/','Home'],
-              ['/menu/','Our menu'],
-              ['/story/','Our story'],
-              ['/stores/','Our stores'],
-              ['/franchise/','Become a partner']
-            ].map(([url,text],i)=>(
-              <Link
-                aria-current={(path.replace(/\/$/,'')===url.replace(/\/$/,''))?'page':undefined}
-                className={(i===4?'partner-link ':'')+(path.replace(/\/$/,'')===url.replace(/\/$/,'')?'active':'')}
-                key={url}
-                href={url}
+          
+          <div className="nav-controls">
+            <nav id="navigation" className={open?'open':''}>
+              {[
+                ['/','Home'],
+                ['/menu/','Our menu'],
+                ['/story/','Our story'],
+                ['/stores/','Our stores'],
+                ['/franchise/','Become a partner']
+              ].map(([url,text],i)=>(
+                <Link
+                  aria-current={(path.replace(/\/$/,'')===url.replace(/\/$/,''))?'page':undefined}
+                  className={(i===4?'partner-link ':'')+(path.replace(/\/$/,'')===url.replace(/\/$/,'')?'active':'')}
+                  key={url}
+                  href={url}
+                >
+                  {text}
+                </Link>
+              ))}
+              <a
+                href={ZOMATO_ORDER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-order-btn in-drawer"
+                aria-label="Order Now on Zomato"
               >
-                {text}
-              </Link>
-            ))}
-          </nav>
+                <span>Order Now</span>
+                <span className="order-arrow" aria-hidden="true">↗</span>
+              </a>
+            </nav>
+
+            <a
+              href={ZOMATO_ORDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-order-btn header-btn"
+              aria-label="Order Now on Zomato"
+            >
+              <span>Order Now</span>
+              <span className="order-arrow" aria-hidden="true">↗</span>
+            </a>
+
+            <button className="mobile-toggle" aria-label={open?'Close menu':'Open menu'} aria-expanded={open} aria-controls="navigation" onClick={()=>setOpen(!open)}>
+              {open?<X size={22}/>:<Menu size={22}/>}
+            </button>
+          </div>
         </div>
       </header>
     </>
@@ -234,21 +259,110 @@ export function MenuCardsShowcase(){
   );
 }
 
+export function ZomatoLogo({size = 18, className = ""}){
+  return (
+    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{flexShrink: 0}}>
+      <rect width="24" height="24" rx="5.5" fill="#E23744"/>
+      <path d="M6 7.2H18L8.8 16.8H18" stroke="#FFFFFF" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+export function SwiggyLogo({size = 18, className = ""}){
+  return (
+    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{flexShrink: 0}}>
+      <rect width="24" height="24" rx="5.5" fill="#FC8019"/>
+      <path d="M12.6 5.5C10.3 5.5 8.6 7 8.6 9C8.6 11.6 11.6 12.4 12.1 13C12.6 13.6 12.4 14.5 11.6 14.7C10.8 14.9 10 14.3 10 14.3L8.6 16C8.6 16 9.8 17.2 11.7 17.2C14.1 17.2 15.8 15.7 15.8 13.7C15.8 11 12.7 10.2 12.2 9.6C11.8 9.1 12.1 8.2 12.8 8C13.5 7.8 14.3 8.4 14.3 8.4L15.7 6.7C15.7 6.7 14.5 5.5 12.6 5.5Z" fill="#FFFFFF"/>
+    </svg>
+  );
+}
+
+export const ZOMATO_ORDER_URL = 'https://www.zomato.com/ncr/cookie-pookie-rohini-new-delhi/order';
+
+export function OnlineDeliveryStrip(){
+  return (
+    <div className="online-delivery-strip">
+      <div className="delivery-strip-content">
+        <div className="delivery-strip-title">
+          <span className="live-dot" aria-hidden="true"></span>
+          <strong>Order Online Delivery</strong>
+          <span className="strip-sub">Craving CookiePookie? Get your favourite desserts delivered right to your door!</span>
+        </div>
+        <div className="delivery-strip-links">
+          <a
+            href={ZOMATO_ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="strip-btn zomato"
+            aria-label="Order CookiePookie on Zomato"
+          >
+            <ZomatoLogo size={18} />
+            <span>Order on Zomato</span>
+            <span className="arrow" aria-hidden="true">↗</span>
+          </a>
+          <div className="strip-btn swiggy" title="Swiggy delivery coming soon">
+            <SwiggyLogo size={18} />
+            <span>Swiggy</span>
+            <span className="strip-badge">Coming soon...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Product({item}){
   const [cat,name,price,description,img]=item;
   return (
     <article className="product">
       {img && (
-        <div className="picture">
-          <img loading="lazy" src={'/assets/'+img+'.webp'} alt={name}/>
-        </div>
+        <a
+          href={ZOMATO_ORDER_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="picture-link"
+          aria-label={`Order ${name} on Zomato`}
+        >
+          <div className="picture">
+            <img loading="lazy" src={'/assets/'+img+'.webp'} alt={name}/>
+            <span className="picture-order-badge">
+              <ZomatoLogo size={14}/>
+              <span>Order on Zomato</span>
+            </span>
+          </div>
+        </a>
       )}
       <div className="info">
         <div className="label">
-          <h3>{name}</h3>
+          <h3>
+            <a
+              href={ZOMATO_ORDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="product-title-link"
+              title={`Order ${name} on Zomato`}
+            >
+              {name}
+            </a>
+          </h3>
           <span className="price">₹{price.replace(' / ',' / ₹')}</span>
         </div>
         <p>{description}</p>
+        
+        <div className="product-order-footer">
+          <a
+            href={ZOMATO_ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="product-order-btn"
+            aria-label={`Order ${name} on Zomato`}
+          >
+            <ZomatoLogo size={16}/>
+            <span>Order on Zomato</span>
+            <span className="btn-arrow" aria-hidden="true">↗</span>
+          </a>
+          <span className="swiggy-soon-text">Swiggy delivery coming soon</span>
+        </div>
       </div>
     </article>
   );
@@ -332,15 +446,31 @@ export function StoreCards(){
   );
 }
 
-export function FranchiseForm(){
-  const [prepared,setPrepared]=useState('');
+export function WhatsAppIcon({size = 18, className = ""}){
   return (
-    <form className="form" onSubmit={e=>{
-      e.preventDefault();
-      const f=new FormData(e.currentTarget);
-      const msg=`Hi CookiePookie! I would like to enquire about a franchise.\nName: ${f.get('first')} ${f.get('last')}\nEmail: ${f.get('email')}\nPhone: ${f.get('phone')}\nPreferred location: ${f.get('location')}\nMessage: ${f.get('message')||'Please share the franchise details.'}`;
-      setPrepared('https://wa.me/919355683343?text='+encodeURIComponent(msg));
-    }}>
+    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style={{flexShrink: 0}}>
+      <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9 0 1.7 1.2 3.4 1.4 3.6.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .8.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.2L2 22l4.9-1.3c1.5.9 3.2 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.5-1.2l-.3-.2-3.3.9.9-3.2-.2-.4c-.9-1.4-1.4-3-1.4-4.7 0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.8-8.2 8.8z"/>
+    </svg>
+  );
+}
+
+export function FranchiseForm(){
+  const [submitted, setSubmitted] = useState(false);
+  const [lastUrl, setLastUrl] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    const msg = `Hi CookiePookie! I would like to enquire about a franchise.\n\n👤 Name: ${f.get('first')} ${f.get('last')}\n📧 Email: ${f.get('email')}\n📞 Phone: ${f.get('phone')}\n📍 Preferred Location: ${f.get('location')}\n💬 Message: ${f.get('message') || 'Please share the franchise details.'}`;
+    const url = 'https://wa.me/919355683343?text=' + encodeURIComponent(msg);
+    setLastUrl(url);
+    setSubmitted(true);
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <form className="form" onSubmit={handleSubmit}>
       <h3>Let’s start a conversation.</h3>
       <p className="note">Tell us a little about yourself and where you’d like to grow.</p>
       <div className="fields">
@@ -351,13 +481,16 @@ export function FranchiseForm(){
         <label className="field full">Preferred city / location<input name="location" required placeholder="Where would you like to open?" maxLength={200}/></label>
         <label className="field full">Anything else you’d like to share? (optional)<textarea name="message" maxLength={1000}/></label>
       </div>
-      <button className="btn" style={{marginTop:22}} type="submit">Prepare my enquiry</button>
-      <small>Your details stay in this page until you choose to send them through WhatsApp.</small>
-      {prepared && (
-        <div className="form-result" role="status">
-          <strong>Your enquiry is ready.</strong>
-          <p>Open WhatsApp to review your message, then send it to the CookiePookie team.</p>
-          <a className="btn pink" href={prepared} target="_blank" rel="noreferrer">Continue to WhatsApp</a>
+      <button className="btn pink" style={{marginTop:22, display:'inline-flex', alignItems:'center', gap:8}} type="submit">
+        <WhatsAppIcon size={18}/>
+        <span>Send Enquiry via WhatsApp</span>
+        <span aria-hidden="true">↗</span>
+      </button>
+      <small style={{display:'block', marginTop:10, color:'#765d54'}}>Submitting opens WhatsApp directly with your message ready to send.</small>
+      {submitted && (
+        <div className="form-result" role="status" style={{marginTop:16}}>
+          <strong>Opening WhatsApp...</strong>
+          <p>If WhatsApp did not open automatically, <a href={lastUrl} target="_blank" rel="noreferrer" style={{color:'#a84255', fontWeight:700}}>click here to send message</a>.</p>
         </div>
       )}
     </form>
