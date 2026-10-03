@@ -57,59 +57,70 @@ export function Header(){
       <a className="skip" href="#main">Skip to content</a>
       <header className={'site-header '+(path==='/'?'home-header':'inner-header')+(scrolled?' is-scrolled':'')+(open?' menu-open':'')}>
         <div className="nav">
-          <div className="nav-top">
-            <Link href="/" aria-label="CookiePookie home" onClick={()=>setOpen(false)}>
+          <div className="nav-bar">
+            <Link href="/" aria-label="CookiePookie home" className="nav-brand-link" onClick={()=>setOpen(false)}>
               <BrandLogo/>
             </Link>
-            
-            <div className="nav-actions">
+
+            {/* Mobile Top Bar Actions: Order Now + Hamburger/Close */}
+            <div className="mobile-header-actions">
               <a
                 href={ZOMATO_ORDER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nav-order-btn header-btn"
+                className="nav-order-btn mobile-header-btn"
                 aria-label="Order Now on Zomato"
               >
                 <span>Order Now</span>
                 <span className="order-arrow" aria-hidden="true">↗</span>
               </a>
 
-              <button className="mobile-toggle" aria-label={open?'Close menu':'Open menu'} aria-expanded={open} aria-controls="navigation" onClick={()=>setOpen(!open)}>
+              <button
+                className="mobile-toggle"
+                aria-label={open?'Close menu':'Open menu'}
+                aria-expanded={open}
+                aria-controls="navigation"
+                onClick={()=>setOpen(!open)}
+              >
                 {open?<X size={22}/>:<Menu size={22}/>}
               </button>
             </div>
           </div>
 
-          <nav id="navigation" className={open?'open':''}>
-            {[
-              ['/','Home'],
-              ['/menu/','Our menu'],
-              ['/story/','Our story'],
-              ['/stores/','Our stores'],
-              ['/franchise/','Become a partner']
-            ].map(([url,text],i)=>(
-              <Link
-                aria-current={(path.replace(/\/$/,'')===url.replace(/\/$/,''))?'page':undefined}
-                className={(i===4?'partner-link ':'')+(path.replace(/\/$/,'')===url.replace(/\/$/,'')?'active':'')}
-                key={url}
-                href={url}
-                onClick={()=>setOpen(false)}
-              >
-                {text}
-              </Link>
-            ))}
+          {/* Desktop Right Nav (links + order now) & Mobile Drawer (links) */}
+          <div className={`nav-menu-group ${open ? 'open' : ''}`}>
+            <nav id="navigation">
+              {[
+                ['/','Home'],
+                ['/menu/','Our menu'],
+                ['/story/','Our story'],
+                ['/stores/','Our stores'],
+                ['/franchise/','Become a partner']
+              ].map(([url,text],i)=>(
+                <Link
+                  aria-current={(path.replace(/\/$/,'')===url.replace(/\/$/,''))?'page':undefined}
+                  className={(i===4?'partner-link ':'')+(path.replace(/\/$/,'')===url.replace(/\/$/,'')?'active':'')}
+                  key={url}
+                  href={url}
+                  onClick={()=>setOpen(false)}
+                >
+                  {text}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Desktop-only Order Now button */}
             <a
               href={ZOMATO_ORDER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="nav-order-btn in-drawer"
+              className="nav-order-btn desktop-order-btn"
               aria-label="Order Now on Zomato"
-              onClick={()=>setOpen(false)}
             >
               <span>Order Now</span>
               <span className="order-arrow" aria-hidden="true">↗</span>
             </a>
-          </nav>
+          </div>
         </div>
       </header>
     </>
