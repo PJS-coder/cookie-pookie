@@ -1511,9 +1511,22 @@ textarea {
 
 /* Footer */
 footer {
+  position: relative;
+  overflow: hidden;
   border-top: 1px solid var(--line);
-  background: white;
+  background-color: var(--cream);
   padding: 55px 5% 25px;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/whole-wheat-triple-pack.webp');
+  background-size: cover;
+  background-position: center 45%;
+  opacity: 0.18;
+  pointer-events: none;
 }
 
 .footer-grid {
@@ -1522,6 +1535,8 @@ footer {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr 1.2fr;
   gap: 70px;
+  position: relative;
+  z-index: 1;
 }
 
 footer h3 {
@@ -1533,6 +1548,14 @@ footer p, footer a {
   font-size: 14px;
 }
 
+footer a {
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--pink);
+}
+
 footer nav {
   display: flex;
   flex-direction: column;
@@ -1542,6 +1565,7 @@ footer nav {
 footer .brand-logo {
   width: 220px;
   margin-bottom: 23px;
+  display: inline-block;
 }
 
 .copyright {
@@ -1551,6 +1575,8 @@ footer .brand-logo {
   padding-top: 20px;
   font-size: 12px;
   color: #795b53;
+  position: relative;
+  z-index: 1;
 }
 
 /* Animations & Transitions */
@@ -2107,12 +2133,24 @@ footer .brand-logo {
     padding: 24px;
   }
 
+  footer {
+    padding: 50px 6% 30px;
+  }
+
   .footer-grid {
-    gap: 35px;
+    gap: 36px;
   }
 
   footer .brand-logo {
-    width: 205px;
+    width: 195px;
+  }
+
+  .copyright {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    margin-top: 36px;
+    padding-top: 20px;
   }
 
   .photo-tag {
