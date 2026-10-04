@@ -2748,3 +2748,115 @@ footer .brand-logo {
   }
 }
 
+/* ==========================================================================
+   CookiePookie Interactive Preloader (Warm Dark Minimal + Ultra-Smooth)
+   ========================================================================== */
+.cp-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, #291714 0%, #1a0f0d 60%, #120a09 100%);
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  cursor: pointer;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1),
+              opacity 0.6s ease,
+              visibility 0.75s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  user-select: none;
+}
+
+/* Super smooth upward curtain exit */
+.cp-preloader.cp-preloader-exit-up {
+  transform: translate3d(0, -100%, 0);
+  opacity: 0.98;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Loader Content Container */
+.cp-loader-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Main Graphic Wrapper */
+.cp-loader-graphic-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  animation: cpGraphicFloat 3s ease-in-out infinite;
+}
+
+.cp-loader-main-img {
+  width: 320px;
+  max-width: 78vw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.5));
+  transform: translateZ(0);
+}
+
+@keyframes cpGraphicFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+/* Minimal Sleek Progress Bar */
+.cp-loader-progress-box {
+  width: 220px;
+  max-width: 70vw;
+  margin-top: 32px;
+}
+
+.cp-loader-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.cp-loader-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f58794 0%, #ff9aa2 50%, #f58794 100%);
+  border-radius: 99px;
+  box-shadow: 0 0 14px rgba(245, 135, 148, 0.9);
+  transition: width 0.08s linear;
+  will-change: width;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .cp-preloader {
+    display: none !important;
+  }
+}
+
+
+
+

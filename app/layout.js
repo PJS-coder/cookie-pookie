@@ -1,5 +1,6 @@
 import './globals.css';
 import ScrollReset from './scroll-reset';
+import PageLoader from './loader';
 import {Header,Footer,Motion} from './components';
 export const metadata = {
   title: {
@@ -12,4 +13,5 @@ export const metadata = {
     apple: '/assets/favicon.png',
   }
 };
-export default function Layout({children}){return <html lang="en"><body><ScrollReset/><Header/><main id="main">{children}</main><Footer/><Motion/></body></html>}
+export default function Layout({children}){return <html lang="en"><body><PageLoader/><ScrollReset/><Header/><main id="main">{children}</main><Footer/><Motion/></body></html>}
+
