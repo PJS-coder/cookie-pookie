@@ -18,14 +18,15 @@ export default function Stores(){
         </div>
       </section>
 
-      <section className="pink-section">
+      <section className="pink-section" style={{marginTop: 60}}>
         <div className="wrap center">
           <div className="eyebrow">SOMETHING ON YOUR MIND?</div>
           <h2>We’d love to hear from you.</h2>
-          <p style={{margin: '22px 0'}}>For store enquiries or feedback, say hello to our team.</p>
+          <p style={{margin: '22px 0'}}>For store enquiries, bulk party orders, or feedback, say hello to our team.</p>
           <a className="btn" href="tel:+919355683343">Call +91 93556 83343</a>
         </div>
       </section>
     </>
   );
 }
+
