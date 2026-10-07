@@ -16,8 +16,8 @@ import {
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Franchisee Business Opportunities',
-  description: 'Join CookiePookie as a franchisee. Benefit from 65% gross margins, low capex, fast ROI (18-24 months), and turnkey store setup across Delhi NCR and India.'
+  title: 'Franchise Business Opportunities',
+  description: 'Join CookiePookie as a franchise partner. Benefit from 65% gross margins, low capex, fast ROI (18-24 months), and turnkey store setup across Delhi NCR and India.'
 };
 
 const kpiItems = [
@@ -162,7 +162,7 @@ export default function Franchise(){
                 <ArrowRight size={16} />
               </a>
               <a
-                href="https://wa.me/919355683343?text=Hi%20CookiePookie!%20Please%20share%20the%20Franchisee%20Deck%20and%20Business%20Model."
+                href="https://wa.me/919355683343?text=Hi%20CookiePookie!%20Please%20share%20the%20Franchise%20Deck%20and%20Business%20Model."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn outline"
@@ -235,11 +235,11 @@ export default function Franchise(){
 
           <div className="resilient-action-row">
             <a href="#enquire" className="btn pink" style={{display: 'inline-flex', alignItems: 'center', gap: 8}}>
-              <span>Become a Franchisee</span>
+              <span>Apply for Franchise</span>
               <ArrowRight size={16} />
             </a>
             <a 
-              href="https://wa.me/919355683343?text=Hi%20CookiePookie!%20Please%20share%20the%20Franchisee%20Deck%20and%20Business%20Model."
+              href="https://wa.me/919355683343?text=Hi%20CookiePookie!%20Please%20share%20the%20Franchise%20Deck%20and%20Business%20Model."
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn outline"
@@ -371,7 +371,7 @@ export default function Franchise(){
               Let’s bring CookiePookie<br/>to your city.
             </h2>
             <p style={{marginTop: 16, color: '#573e36', lineHeight: 1.6, fontSize: 16}}>
-              Fill out the franchisee application form and our franchise expansion team will connect with you to discuss feasibility and opportunities.
+              Fill out the franchise application form and our franchise expansion team will connect with you to discuss feasibility and opportunities.
             </p>
 
             <div className="franchise-sidebar-card" style={{marginTop: 24}}>
@@ -404,6 +404,10 @@ export default function Franchise(){
                 <div>
                   <strong>Registered Office</strong>
                   <p>Shop No. 18–19, Shaheed Udham Singh Marg, Block AL, Poorbi Shalimar Bagh, Delhi – 110088</p>
+                  <p style={{fontSize: 13, color: '#795b53', marginTop: 4, lineHeight: 1.5}}>
+                    <strong>Timings:</strong> 10:00 AM to 6:00 PM<br/>
+                    <strong>Days:</strong> Monday to Saturday
+                  </p>
                 </div>
               </div>
             </div>

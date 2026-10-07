@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {useState, useEffect} from 'react';
-import {Menu, X, MapPin, Phone, Clock, Pause, Play, BookOpen, Maximize2} from 'lucide-react';
+import {Menu, X, MapPin, Phone, Clock, Pause, Play, BookOpen, Maximize2, ChevronLeft, ChevronRight} from 'lucide-react';
 import {products, stores} from './data';
 
 export const ZOMATO_ORDER_URL = 'https://www.zomato.com/ncr/cookie-pookie-rohini-new-delhi/order';
@@ -293,6 +293,188 @@ export function StoreGalleryShowcase({compact = false, title = "Step Inside Cook
   );
 }
 
+export function StoreAutoCarousel({
+  title = "Our Delhi Stores in Motion",
+  eyebrow = "TAKE A LOOK INSIDE",
+  interval = 2000
+}){
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // All store images
+  const slides = [
+    {
+      src: '/assets/store-1.png',
+      name: 'Ashok Vihar Flagship Store',
+      tag: 'Ashok Vihar',
+      address: 'B-2/25, Pocket B2, Phase 2, Ashok Vihar, New Delhi',
+      status: 'Open Daily · 11am – 1am',
+      isComingSoon: false
+    },
+    {
+      src: '/assets/store-2.jpeg',
+      name: 'Shankar Road Storefront & Counter',
+      tag: 'Shankar Road',
+      address: '2/58 Shankar Road, Old Rajinder Nagar, New Delhi',
+      status: 'Open Daily · 11am – 1am',
+      isComingSoon: false
+    },
+    {
+      src: '/assets/store-4.jpeg',
+      name: 'Pitampura Dine-In Space',
+      tag: 'Pitampura',
+      address: '1, Shiva Enclave, Road No. 44, Pitampura, New Delhi',
+      status: 'Open Daily · 11am – 1am',
+      isComingSoon: false
+    },
+    {
+      src: '/assets/store-6.jpeg',
+      name: 'Shalimar Bagh Location',
+      tag: 'Shalimar Bagh',
+      address: 'Shop No. 18–19, Block AL, Poorbi Shalimar Bagh, Delhi',
+      status: 'Coming Soon',
+      isComingSoon: true
+    },
+    {
+      src: '/assets/store-7.jpeg',
+      name: 'Aesthetic Warm Interiors',
+      tag: 'Store Ambience',
+      address: 'Cozy seating & Instagrammable pastel dessert vibes',
+      status: 'Visit Us',
+      isComingSoon: false
+    },
+    {
+      src: '/assets/store-8.jpeg',
+      name: 'Live Waffle & Cookie Station',
+      tag: 'Live Baking',
+      address: 'Warm Belgian waffles & soft baked cookies made fresh to order',
+      status: 'Fresh Daily',
+      isComingSoon: false
+    }
+  ];
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % slides.length);
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [isPaused, interval, slides.length]);
+
+  const handlePrev = (e) => {
+    e?.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleNext = (e) => {
+    e?.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % slides.length);
+  };
+
+  return (
+    <div 
+      className="store-auto-carousel-wrapper"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+    >
+      <div className="section-top" style={{marginBottom: 20}}>
+        <div>
+          {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+          <h2>{title}</h2>
+        </div>
+        <div className="carousel-controls-header">
+          <button 
+            className="carousel-arrow-btn" 
+            onClick={handlePrev} 
+            aria-label="Previous store image"
+          >
+            <ChevronLeft size={18}/>
+          </button>
+          <span className="carousel-counter">
+            0{currentIndex + 1} / 0{slides.length}
+          </span>
+          <button 
+            className="carousel-arrow-btn" 
+            onClick={handleNext} 
+            aria-label="Next store image"
+          >
+            <ChevronRight size={18}/>
+          </button>
+        </div>
+      </div>
+
+      <div className="store-carousel-stage">
+        <div 
+          className="store-carousel-track"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {slides.map((slide, i) => (
+            <div className="store-carousel-slide" key={i}>
+              <div className="store-carousel-media-box">
+                <img 
+                  src={slide.src} 
+                  alt={slide.name} 
+                  className="store-carousel-img" 
+                  loading={i === 0 ? "eager" : "lazy"}
+                />
+                <div className="store-carousel-overlay">
+                  <div className="carousel-tag-pill">
+                    {slide.isComingSoon ? (
+                      <span className="badge-coming-soon">✨ Coming Soon</span>
+                    ) : (
+                      <span className="badge-open">
+                        <span className="store-live-dot" /> {slide.status}
+                      </span>
+                    )}
+                  </div>
+                  <div className="carousel-info-box">
+                    <span className="carousel-location-tag">{slide.tag}</span>
+                    <h3>{slide.name}</h3>
+                    <p>{slide.address}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Previous & Next overlay buttons */}
+        <button 
+          className="carousel-side-nav side-prev" 
+          onClick={handlePrev} 
+          aria-label="Previous image"
+        >
+          <ChevronLeft size={22}/>
+        </button>
+        <button 
+          className="carousel-side-nav side-next" 
+          onClick={handleNext} 
+          aria-label="Next image"
+        >
+          <ChevronRight size={22}/>
+        </button>
+
+        {/* Progress Dots Bar */}
+        <div className="carousel-dots-bar">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              className={`carousel-dot ${idx === currentIndex ? 'active' : ''}`}
+              onClick={() => setCurrentIndex(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+            >
+              <span className="carousel-dot-fill" />
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function StoreImageMarquee({
   title = "Step inside our dessert haven.",
   eyebrow = "INSIDE COOKIEPOOKIE",
@@ -438,7 +620,7 @@ export function Header(){
                 ['/menu/', 'Our menu'],
                 ['/story/', 'Our story'],
                 ['/stores/', 'Our stores'],
-                ['/franchise/', 'Franchisee'],
+                ['/franchise/', 'Franchise'],
                 ['/contact/', 'Contact']
               ].map(([url, text], i) => (
                 <Link
@@ -517,7 +699,7 @@ export function Footer(){
             <Link href="/menu/">Our menu</Link>
             <Link href="/story/">Our story</Link>
             <Link href="/stores/">Our stores</Link>
-            <Link href="/franchise/">Franchisee opportunity</Link>
+            <Link href="/franchise/">Franchise opportunity</Link>
             <Link href="/contact/">Contact us</Link>
           </nav>
         </div>
@@ -533,9 +715,13 @@ export function Footer(){
               <Phone size={16}/> +91 93556 83343
             </a>
           </p>
-          <p style={{marginTop: 16}}>
+          <p style={{marginTop: 16, lineHeight: 1.6}}>
             <strong>Registered Office</strong><br/>
-            Shop No. 18–19, Shaheed Udham Singh Marg, Block AL, Poorbi Shalimar Bagh, Delhi – 110088
+            Shop No. 18–19, Shaheed Udham Singh Marg, Block AL, Poorbi Shalimar Bagh, Delhi – 110088<br/>
+            <span style={{fontSize: 13, color: '#795b53'}}>
+              <strong>Timings:</strong> 10:00 AM to 6:00 PM<br/>
+              <strong>Days:</strong> Monday to Saturday
+            </span>
           </p>
         </div>
       </div>
@@ -807,22 +993,138 @@ export function MenuGrid(){
   );
 }
 
+function StoreCardCarousel({ storeName, storeImages, isComingSoon }){
+  const images = Array.isArray(storeImages) && storeImages.length > 0
+    ? storeImages
+    : typeof storeImages === 'string'
+    ? [storeImages]
+    : ['/assets/store-1.png'];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused || images.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 2000); // 2 second auto-scroll
+
+    return () => clearInterval(timer);
+  }, [isPaused, images.length]);
+
+  const handlePrev = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  return (
+    <div 
+      className="store-card-carousel"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+    >
+      <div 
+        className="store-card-track"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {images.map((src, idx) => (
+          <div className="store-card-slide" key={idx}>
+            <img 
+              src={src} 
+              alt={`${storeName} photo ${idx + 1}`} 
+              className="store-card-img" 
+              loading={idx === 0 ? "eager" : "lazy"}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Coming Soon Overlay Badge (if applicable) */}
+      {isComingSoon && (
+        <div className="store-status-overlay">
+          <span className="store-badge badge-coming-soon">✨ Coming Soon</span>
+        </div>
+      )}
+
+      {/* Manual Arrow Controls on hover (only if multiple images) */}
+      {images.length > 1 && (
+        <>
+          <button 
+            className="store-card-nav-btn prev" 
+            onClick={handlePrev} 
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={16}/>
+          </button>
+          <button 
+            className="store-card-nav-btn next" 
+            onClick={handleNext} 
+            aria-label="Next image"
+          >
+            <ChevronRight size={16}/>
+          </button>
+
+          {/* Mini Dot Indicators */}
+          <div className="store-card-dots">
+            {images.map((_, idx) => (
+              <button
+                key={idx}
+                className={`store-mini-dot ${idx === currentIndex ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setCurrentIndex(idx);
+                }}
+                aria-label={`View photo ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 export function StoreCards(){
   return (
     <div className="store-grid">
-      {stores.map(([name, address], i) => (
-        <article className="store reveal" key={name}>
-          <div className="number">0{i+1} / NEW DELHI</div>
-          <h3>{name}</h3>
-          <p>{address}</p>
-          <div className="hours"><Clock size={16}/> Every day · 11am – 1am</div>
-          <div className="actions">
-            <a className="btn" href={'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Cookie Pookie ' + address)} target="_blank" rel="noreferrer">
-              <MapPin size={16}/>Get directions
-            </a>
-            <a className="btn outline" href="tel:+919355683343">
-              <Phone size={16}/>Call store
-            </a>
+      {stores.map(([name, address, images, hours, isComingSoon], i) => (
+        <article className={`store reveal ${isComingSoon ? 'store-coming-soon' : ''}`} key={name}>
+          <StoreCardCarousel 
+            storeName={name} 
+            storeImages={images} 
+            isComingSoon={isComingSoon} 
+          />
+          <div className="store-card-content">
+            <div className="number">0{i+1} / NEW DELHI</div>
+            <h3>{name}</h3>
+            <p>{address}</p>
+            <div className="hours">
+              <Clock size={16}/> {isComingSoon ? 'Opening Soon in Shalimar Bagh' : (hours || 'Every day · 11am – 1am')}
+            </div>
+            <div className="actions">
+              <a className="btn" href={'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Cookie Pookie ' + address)} target="_blank" rel="noreferrer">
+                <MapPin size={16}/>Get directions
+              </a>
+              {!isComingSoon ? (
+                <a className="btn outline" href="tel:+919355683343">
+                  <Phone size={16}/>Call store
+                </a>
+              ) : (
+                <span className="btn outline coming-soon-tag">
+                  Coming Soon
+                </span>
+              )}
+            </div>
           </div>
         </article>
       ))}
@@ -847,7 +1149,7 @@ export function FranchiseFAQAccordion(){
       a: 'We require 150 to 400 sq. ft. of carpet area with a minimum 10-12 ft frontage. Prime high-street locations, major market corridors, food hubs, and popular shopping mall food courts with high footfall are ideal.'
     },
     {
-      q: 'What turnkey support does CookiePookie provide to franchisees?',
+      q: 'What turnkey support does CookiePookie provide for a franchise?',
       a: 'We assist with complete site feasibility analysis, 3D architectural store layout, commercial equipment sourcing, doorstep ingredient supply chain, staff hiring & hands-on training, cloud POS setup, and high-impact digital marketing & aggregator onboarding (Zomato / Swiggy).'
     },
     {
@@ -893,7 +1195,7 @@ export function FranchiseForm(){
   const handleSubmit = (e) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    const msg = `Hi CookiePookie! I would like to apply for a Franchisee opportunity.\n\n👤 Name: ${f.get('first')} ${f.get('last')}\n📧 Email: ${f.get('email')}\n📞 Phone: ${f.get('phone')}\n📍 Preferred Location: ${f.get('location')}\n💰 Investment Budget: ${f.get('budget') || '₹15 - ₹25 Lakhs'}\n💬 Message: ${f.get('message') || 'Please share the franchisee deck & business details.'}`;
+    const msg = `Hi CookiePookie! I would like to apply for a Franchise opportunity.\n\n👤 Name: ${f.get('first')} ${f.get('last')}\n📧 Email: ${f.get('email')}\n📞 Phone: ${f.get('phone')}\n📍 Preferred Location: ${f.get('location')}\n💰 Investment Budget: ${f.get('budget') || '₹15 - ₹25 Lakhs'}\n💬 Message: ${f.get('message') || 'Please share the franchise deck & business details.'}`;
     const url = 'https://wa.me/919355683343?text=' + encodeURIComponent(msg);
     setLastUrl(url);
     setSubmitted(true);
@@ -902,7 +1204,7 @@ export function FranchiseForm(){
 
   return (
     <form className="form franchise-styled-form" onSubmit={handleSubmit}>
-      <div className="form-header-badge">FRANCHISEE APPLICATION</div>
+      <div className="form-header-badge">FRANCHISE APPLICATION</div>
       <h3>Franchise Enquiry</h3>
       <p className="note">Take the first step toward owning a profitable CookiePookie outlet.</p>
       
@@ -925,7 +1227,7 @@ export function FranchiseForm(){
 
       <button className="btn pink" style={{marginTop: 22, width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8}} type="submit">
         <WhatsAppIcon size={18}/>
-        <span>Submit Franchisee Enquiry</span>
+        <span>Submit Franchise Enquiry</span>
         <span aria-hidden="true">↗</span>
       </button>
 
@@ -969,7 +1271,7 @@ export function ContactForm(){
           <select name="subject" defaultValue="General Inquiry">
             <option value="General Inquiry">General Inquiry / Feedback</option>
             <option value="Party & Catering">Party & Event Bulk Orders</option>
-            <option value="Franchisee Inquiry">Franchisee Opportunity</option>
+            <option value="Franchise Inquiry">Franchise Opportunity</option>
             <option value="Customer Support">Customer Support</option>
           </select>
         </label>

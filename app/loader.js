@@ -2,82 +2,64 @@
 import { useState, useEffect } from 'react';
 
 export default function PageLoader() {
-  const [progress, setProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    // Respect user's reduced motion setting
+    // Check reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       setIsHidden(true);
       return;
     }
 
-    const duration = 2200; // ~2.2 seconds total load time
-    const startTime = performance.now();
+    // Display time ~2 seconds total
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+      setTimeout(() => {
+        setIsHidden(true);
+      }, 700);
+    }, 2000);
 
-    let animationFrameId;
-
-    const animateProgress = (now) => {
-      const elapsed = now - startTime;
-      const rawProgress = Math.min(100, Math.floor((elapsed / duration) * 100));
-      setProgress(rawProgress);
-
-      if (elapsed < duration) {
-        animationFrameId = requestAnimationFrame(animateProgress);
-      } else {
-        setProgress(100);
-        setTimeout(() => {
-          setIsLoaded(true);
-          // Unmount after the smooth slide up completes
-          setTimeout(() => {
-            setIsHidden(true);
-          }, 800);
-        }, 150);
-      }
-    };
-
-    animationFrameId = requestAnimationFrame(animateProgress);
-
-    return () => {
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   const handleSkip = () => {
+    if (isLoaded) return;
     setIsLoaded(true);
-    setTimeout(() => setIsHidden(true), 800);
+    setTimeout(() => setIsHidden(true), 600);
   };
 
   if (isHidden) return null;
 
   return (
-    <aside 
-      className={`cp-preloader ${isLoaded ? 'cp-preloader-exit-up' : ''}`}
+    <aside
+      className={`cp-pro-loader ${isLoaded ? 'cp-pro-loader-exit' : ''}`}
       role="status"
       aria-live="polite"
-      aria-label="Loading CookiePookie"
+      aria-label="CookiePookie Loading"
       onClick={handleSkip}
-      title="Tap to continue"
     >
-      <div className="cp-loader-content">
-        {/* Only Loader Logo */}
-        <div className="cp-loader-graphic-wrap">
-          <img 
-            src="/assets/loader.png" 
-            alt="CookiePookie" 
-            className="cp-loader-main-img"
+      {/* Main Container */}
+      <div className="cp-hand-loader-container">
+        {/* Brand Logo (Clean, No Shine) */}
+        <div className="cp-pro-logo-stage">
+          <img
+            src="/assets/cookiepookie-logo.png"
+            alt="CookiePookie"
+            className="cp-pro-logo-img"
           />
         </div>
 
-        {/* Only Loader Progress Bar */}
-        <div className="cp-loader-progress-box">
-          <div className="cp-loader-track">
-            <div 
-              className="cp-loader-bar" 
-              style={{ width: `${progress}%` }} 
-            />
+        {/* Tapping Hand Animation */}
+        <div className="cp-hand-wrapper">
+          <div className="cp-tap-hand">
+            <div className="cp-tap-finger" />
+            <div className="cp-tap-finger" />
+            <div className="cp-tap-finger" />
+            <div className="cp-tap-finger" />
+            <div className="cp-tap-palm" />
+            <div className="cp-tap-thumb" />
           </div>
         </div>
       </div>

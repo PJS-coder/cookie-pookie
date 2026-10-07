@@ -39,10 +39,53 @@ export const products = [
 ];
 
 export const stores = [
-  ['Ashok Vihar', 'B-2/25, Pocket B2, Phase 2, Ashok Vihar, New Delhi – 110052'],
-  ['Shankar Road', '2/58 Shankar Road, Opp. BSES Electricity Office, Block 1, Old Rajinder Nagar, New Delhi – 110060'],
-  ['Pitampura', '1, Shiva Enclave, near Engineers Enclave, Harsh Vihar Crossing, Road No. 44, Pitampura, New Delhi – 110034'],
-  ['Shalimar Bagh', 'Shop No. 18–19, Shaheed Udham Singh Marg, Block AL, Poorbi Shalimar Bagh, Delhi – 110088']
+  [
+    'Ashok Vihar',
+    'B-2/25, Pocket B2, Phase 2, Ashok Vihar, New Delhi – 110052',
+    [
+      '/assets/Ashok-vihar1.jpeg',
+      '/assets/Ashok-vihar2.jpeg',
+      '/assets/Ashok-vihar3.jpeg',
+      '/assets/Ashok-vihar4.jpeg',
+      '/assets/Ashok-vihar5.jpeg',
+      '/assets/store-1.png'
+    ],
+    'Every day · 11am – 1am',
+    false
+  ],
+  [
+    'Shankar Road',
+    '2/58 Shankar Road, Opp. BSES Electricity Office, Block 1, Old Rajinder Nagar, New Delhi – 110060',
+    [
+      '/assets/shankar-road.PNG',
+      '/assets/store-2.jpeg'
+    ],
+    'Every day · 11am – 1am',
+    false
+  ],
+  [
+    'Pitampura',
+    '1, Shiva Enclave, near Engineers Enclave, Harsh Vihar Crossing, Road No. 44, Pitampura, New Delhi – 110034',
+    [
+      '/assets/Pitampura1.JPG',
+      '/assets/Pitampura8.jpeg',
+      '/assets/Pitampura9.jpeg',
+      '/assets/store-4.jpeg'
+    ],
+    'Every day · 11am – 1am',
+    false
+  ],
+  [
+    'Shalimar Bagh',
+    'Shop No. 18–19, Shaheed Udham Singh Marg, Block AL, Poorbi Shalimar Bagh, Delhi – 110088',
+    [
+      '/assets/store-6.jpeg',
+      '/assets/store-7.jpeg',
+      '/assets/store-8.jpeg'
+    ],
+    'Opening Soon',
+    true
+  ]
 ];
 
 export const story = [

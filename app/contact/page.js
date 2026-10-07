@@ -64,8 +64,9 @@ export default function Contact(){
                 <p>
                   Shop No. 18–19, Shaheed Udham Singh Marg, Block AL, Poorbi Shalimar Bagh, Delhi – 110088
                 </p>
-                <div style={{marginTop: 8, fontSize: 13, color: '#8c736c', display: 'flex', alignItems: 'center', gap: 6}}>
-                  <Clock size={14}/> Open 7 days a week · 11am – 1am
+                <div style={{marginTop: 8, fontSize: 13, color: '#795b53', display: 'flex', flexDirection: 'column', gap: 3}}>
+                  <div><Clock size={14} style={{display: 'inline', verticalAlign: 'middle', marginRight: 4}}/><strong>Timings:</strong> 10:00 AM to 6:00 PM</div>
+                  <div style={{marginLeft: 18}}><strong>Days:</strong> Monday to Saturday</div>
                 </div>
               </div>
             </div>
@@ -132,7 +133,7 @@ export default function Contact(){
             Join our high-growth dessert brand with 65% gross margins and high ROI. Explore our turnkey franchise model.
           </p>
           <Link className="btn pink" href="/franchise/" style={{display: 'inline-flex', alignItems: 'center', gap: 8}}>
-            <span>Explore Franchisee Model</span>
+            <span>Explore Franchise Model</span>
             <ArrowRight size={16}/>
           </Link>
         </div>

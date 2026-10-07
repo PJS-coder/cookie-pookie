@@ -7,7 +7,7 @@ export const metadata = {
     default: 'CookiePookie — A little bite. A lot of happy.',
     template: '%s | CookiePookie'
   },
-  description: 'Soft baked cookies, Belgian waffles, coffee and more. Explore CookiePookie’s menu, visit our four Delhi stores, or become a franchisee.',
+  description: 'Soft baked cookies, Belgian waffles, coffee and more. Explore CookiePookie’s menu, visit our Delhi stores, or explore franchise opportunities.',
   icons: {
     icon: '/assets/favicon.png',
     apple: '/assets/favicon.png',

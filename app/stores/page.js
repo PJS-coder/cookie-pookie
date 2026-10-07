@@ -2,7 +2,7 @@ import {PageHead, StoreCards} from '../components';
 
 export const metadata = {
   title: 'Our Stores',
-  description: 'Visit CookiePookie stores across New Delhi in Ashok Vihar, Shankar Road, Pitampura, and Shalimar Bagh. Open daily 11am to 1am.'
+  description: 'Visit CookiePookie stores across New Delhi in Ashok Vihar, Shankar Road, and Pitampura (Open daily 11am to 1am), plus Shalimar Bagh coming soon!'
 };
 
 export default function Stores(){
@@ -10,7 +10,7 @@ export default function Stores(){
     <>
       <section className="wrap inner-page-wrap">
         <PageHead eyebrow="COME OVER. STAY FOR DESSERT." title="A little closer to happy.">
-          Find CookiePookie across Delhi. All four stores welcome you every day, from 11am to 1am.
+          Find CookiePookie across Delhi. Ashok Vihar, Shankar Road, and Pitampura welcome you daily from 11am to 1am, with Shalimar Bagh coming soon!
         </PageHead>
         
         <div style={{marginTop: 40}}>

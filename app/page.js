@@ -60,11 +60,16 @@ export default function Home(){
           <p>Four little destinations for big cravings. Drop in for your afternoon pick-me-up or your late-night dessert fix.</p>
         </div>
         <div className="home-stores">
-          {['Ashok Vihar', 'Shankar Road', 'Pitampura', 'Shalimar Bagh'].map((s, i) => (
-            <Link href="/stores/" key={s}>
+          {[
+            { name: 'Ashok Vihar', hours: '11am – 1am', isComingSoon: false },
+            { name: 'Shankar Road', hours: '11am – 1am', isComingSoon: false },
+            { name: 'Pitampura', hours: '11am – 1am', isComingSoon: false },
+            { name: 'Shalimar Bagh', hours: 'Coming Soon', isComingSoon: true }
+          ].map((s, i) => (
+            <Link href="/stores/" key={s.name} className={s.isComingSoon ? 'home-store-coming-soon' : ''}>
               <span>0{i+1}</span>
-              <h3>{s}</h3>
-              <span>11am – 1am</span>
+              <h3>{s.name}</h3>
+              <span className={s.isComingSoon ? 'coming-soon-pill' : ''}>{s.hours}</span>
             </Link>
           ))}
         </div>
@@ -81,7 +86,7 @@ export default function Home(){
             <h2>Your city. Our desserts.<br/>A new chapter, together.</h2>
             <p>Be part of the next CookiePookie success story with 65% gross margins and high ROI.</p>
           </div>
-          <Link className="btn pink" href="/franchise/">Become a franchisee</Link>
+          <Link className="btn pink" href="/franchise/">Explore Franchise</Link>
         </div>
       </section>
     </>
