@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Hero from './hero';
 import DessertStack from './dessert-stack';
+import AwardSection from './award-section';
 import {Product, Marquee, StoreImageMarquee} from './components';
 import {products} from './data';
 
@@ -49,6 +50,9 @@ export default function Home(){
           subtitle="Experience the warm aromas, aesthetic store vibes, and live dessert counters across Delhi."
         />
       </section>
+
+      {/* Award & Recognition Showcase */}
+      <AwardSection/>
 
       {/* Delhi Neighbourhood Stores */}
       <section className="wrap reveal">
