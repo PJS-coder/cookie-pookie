@@ -13,13 +13,13 @@ export default function PageLoader() {
       return;
     }
 
-    // Display time ~2 seconds total
+    // Display time ~1.6 seconds
     const timer = setTimeout(() => {
       setIsLoaded(true);
       setTimeout(() => {
         setIsHidden(true);
-      }, 700);
-    }, 2000);
+      }, 650);
+    }, 1600);
 
     return () => clearTimeout(timer);
   }, []);
@@ -27,7 +27,7 @@ export default function PageLoader() {
   const handleSkip = () => {
     if (isLoaded) return;
     setIsLoaded(true);
-    setTimeout(() => setIsHidden(true), 600);
+    setTimeout(() => setIsHidden(true), 500);
   };
 
   if (isHidden) return null;
@@ -40,9 +40,8 @@ export default function PageLoader() {
       aria-label="CookiePookie Loading"
       onClick={handleSkip}
     >
-      {/* Main Container */}
-      <div className="cp-hand-loader-container">
-        {/* Brand Logo (Clean, No Shine) */}
+      <div className="cp-logo-loader-container">
+        <div className="cp-logo-glow-halo" />
         <div className="cp-pro-logo-stage">
           <img
             src="/assets/cookiepookie-logo.png"
@@ -50,19 +49,9 @@ export default function PageLoader() {
             className="cp-pro-logo-img"
           />
         </div>
-
-        {/* Tapping Hand Animation */}
-        <div className="cp-hand-wrapper">
-          <div className="cp-tap-hand">
-            <div className="cp-tap-finger" />
-            <div className="cp-tap-finger" />
-            <div className="cp-tap-finger" />
-            <div className="cp-tap-finger" />
-            <div className="cp-tap-palm" />
-            <div className="cp-tap-thumb" />
-          </div>
-        </div>
+        <div className="cp-loader-tagline">A LITTLE INDULGENCE. A LOT OF JOY.</div>
       </div>
     </aside>
   );
 }
+

@@ -47,21 +47,24 @@ export const stores = [
       '/assets/Ashok-vihar2.jpeg',
       '/assets/Ashok-vihar3.jpeg',
       '/assets/Ashok-vihar4.jpeg',
-      '/assets/Ashok-vihar5.jpeg',
-      '/assets/store-1.png'
+      '/assets/Ashok-vihar5.jpeg'
     ],
     'Every day · 11am – 1am',
-    false
+    false,
+    'https://maps.app.goo.gl/xzqJ5wL5aE4Y462Q8'
   ],
   [
     'Shankar Road',
     '2/58 Shankar Road, Opp. BSES Electricity Office, Block 1, Old Rajinder Nagar, New Delhi – 110060',
     [
+      '/assets/store-1.png',
+      '/assets/store-4.jpeg',
       '/assets/shankar-road.PNG',
       '/assets/store-2.jpeg'
     ],
     'Every day · 11am – 1am',
-    false
+    false,
+    'https://maps.app.goo.gl/mSe1NoEyNXmKQS1f6'
   ],
   [
     'Pitampura',
@@ -69,11 +72,11 @@ export const stores = [
     [
       '/assets/Pitampura1.JPG',
       '/assets/Pitampura8.jpeg',
-      '/assets/Pitampura9.jpeg',
-      '/assets/store-4.jpeg'
+      '/assets/Pitampura9.jpeg'
     ],
     'Every day · 11am – 1am',
-    false
+    false,
+    'https://maps.app.goo.gl/nosVe7YTDLBV5gCA9'
   ],
   [
     'Shalimar Bagh',
@@ -84,7 +87,8 @@ export const stores = [
       '/assets/store-8.jpeg'
     ],
     'Opening Soon',
-    true
+    true,
+    'https://maps.app.goo.gl/F6Q8ZQexQs4SWDZv9'
   ]
 ];
 

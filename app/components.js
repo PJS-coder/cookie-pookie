@@ -99,9 +99,9 @@ export const storeGalleryItems = [
     id: 'store-1',
     type: 'image',
     src: '/assets/store-1.png',
-    title: 'Ashok Vihar Flagship Store',
+    title: 'Shankar Road Store',
     caption: 'Modern store entrance with warm pastel interiors and live dessert counter.',
-    tag: 'Flagship Outlet'
+    tag: 'Shankar Road'
   },
   {
     id: 'store-2',
@@ -123,9 +123,9 @@ export const storeGalleryItems = [
     id: 'store-4',
     type: 'image',
     src: '/assets/store-4.jpeg',
-    title: 'Cozy Dine-In & Social Seating',
+    title: 'Shankar Road Dine-In & Seating',
     caption: 'Chic dessert space crafted for catching up with friends and family over sweet cravings.',
-    tag: 'Dine-In Space'
+    tag: 'Shankar Road'
   },
   {
     id: 'store-6',
@@ -304,7 +304,7 @@ export function StoreAutoCarousel({
   // All store images
   const slides = [
     {
-      src: '/assets/store-1.png',
+      src: '/assets/Ashok-vihar1.jpeg',
       name: 'Ashok Vihar Flagship Store',
       tag: 'Ashok Vihar',
       address: 'B-2/25, Pocket B2, Phase 2, Ashok Vihar, New Delhi',
@@ -312,7 +312,7 @@ export function StoreAutoCarousel({
       isComingSoon: false
     },
     {
-      src: '/assets/store-2.jpeg',
+      src: '/assets/store-1.png',
       name: 'Shankar Road Storefront & Counter',
       tag: 'Shankar Road',
       address: '2/58 Shankar Road, Old Rajinder Nagar, New Delhi',
@@ -320,7 +320,7 @@ export function StoreAutoCarousel({
       isComingSoon: false
     },
     {
-      src: '/assets/store-4.jpeg',
+      src: '/assets/Pitampura1.JPG',
       name: 'Pitampura Dine-In Space',
       tag: 'Pitampura',
       address: '1, Shiva Enclave, Road No. 44, Pitampura, New Delhi',
@@ -1097,7 +1097,7 @@ function StoreCardCarousel({ storeName, storeImages, isComingSoon }){
 export function StoreCards(){
   return (
     <div className="store-grid">
-      {stores.map(([name, address, images, hours, isComingSoon], i) => (
+      {stores.map(([name, address, images, hours, isComingSoon, mapUrl], i) => (
         <article className={`store reveal ${isComingSoon ? 'store-coming-soon' : ''}`} key={name}>
           <StoreCardCarousel 
             storeName={name} 
@@ -1112,7 +1112,7 @@ export function StoreCards(){
               <Clock size={16}/> {isComingSoon ? 'Opening Soon in Shalimar Bagh' : (hours || 'Every day · 11am – 1am')}
             </div>
             <div className="actions">
-              <a className="btn" href={'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Cookie Pookie ' + address)} target="_blank" rel="noreferrer">
+              <a className="btn" href={mapUrl || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Cookie Pookie ' + address))} target="_blank" rel="noreferrer">
                 <MapPin size={16}/>Get directions
               </a>
               {!isComingSoon ? (
