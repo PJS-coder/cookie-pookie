@@ -85,6 +85,43 @@ export function ZomatoLogo({size = 18, className = ""}){
   );
 }
 
+export function DeliveryBoyIcon({size = 19, className = ""}){
+  return (
+    <svg 
+      className={`delivery-scooter-icon ${className}`} 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="1.9" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      aria-hidden="true" 
+      style={{flexShrink: 0}}
+    >
+      {/* Rider Helmet / Head */}
+      <circle cx="14.5" cy="5.5" r="2.1" fill="currentColor" stroke="none" />
+      {/* Helmet Visor */}
+      <path d="M16 4.8h1.2" strokeWidth="1.6" />
+      {/* Rider Body & Arm reaching to handlebar */}
+      <path d="M14 7.5l-2.2 4 3 .4 2.2-3.6" />
+      {/* Delivery Box / Backpack on Rider Back */}
+      <rect x="7" y="6.8" width="4.5" height="5.2" rx="1.2" fill="currentColor" stroke="none" />
+      {/* Scooter Step-through Frame & Steering Column */}
+      <path d="M5.5 17h7.8l2.7-4.8h2" />
+      {/* Handlebar */}
+      <path d="M17.5 9.8h2" strokeWidth="2" />
+      {/* Front Wheel */}
+      <circle cx="18" cy="17" r="2.4" strokeWidth="1.9" fill="none" />
+      {/* Rear Wheel */}
+      <circle cx="5.5" cy="17" r="2.4" strokeWidth="1.9" fill="none" />
+      {/* Speed / Motion lines */}
+      <path d="M2 10.5h2.2M1 13.5h2" strokeWidth="1.5" opacity="0.8" />
+    </svg>
+  );
+}
+
 export function SwiggyLogo({size = 18, className = ""}){
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{flexShrink: 0}}>
@@ -597,7 +634,7 @@ export function Header(){
                 aria-label="Order Now on Zomato"
               >
                 <span>Order Now</span>
-                <span className="order-arrow" aria-hidden="true">↗</span>
+                <DeliveryBoyIcon size={17} />
               </a>
 
               <button
@@ -644,7 +681,7 @@ export function Header(){
               aria-label="Order Now on Zomato"
             >
               <span>Order Now</span>
-              <span className="order-arrow" aria-hidden="true">↗</span>
+              <DeliveryBoyIcon size={18} />
             </a>
           </div>
         </div>
